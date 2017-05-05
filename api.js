@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var util = require('util');
 
-var validateListOfFloatArgs = module.exports.validateArgs = function (list) {
+var validateListOfFloatArgs = module.exports.parseArgs = function (list) {
 	var floats = _.map(list, parseFloat);
 	_.each(floats, function (number, i) {
 		var err;
@@ -67,52 +67,13 @@ var normalizedVariance = module.exports.normalizedVariance = function (list) {
 	return actual/( worst - best);
 };
 
-
-
-
-
-
-module.exports.unfair = function (list) {
-	'use strict';
-
-	var floats;
-	var sum;
-	var min;
-	var max;
-	var result;
-
-	// normalize...
-	floats = _.map(list, function (number) {
-		return parseFloat(number);
-	});
-
-	// validate...
-	_.each(floats, function (number, i) {
-		if (_.isNaN(number)){
-			throw(new Error('The element ' + number + ' is not a number.'));
-		}
-		if (number < 0){
-			throw(new Error('The element ' + number + ' is less than 0.'));
-		}
-	});
-
-	// calculate...
-	sum = _.sum(floats) || 0;
-	min = _.min(floats) || 0;
-	max = _.max(floats) || 0;
-
-	if (sum === 0) {
-		result = 0;
-	} else {
-		result = (max - min)/sum;
+var unfair = module.exports.unfair = function (list) {
+	var floats = validateListOfFloatArgs(list);
+	var n = floats.length;
+	var sum = _.sum(floats);
+	var diff = _.max(floats) - _.min(floats);
+	if (sum === 0){
+		return 0;
 	}
-	return {
-		list: floats.sort(),
-		min: min,
-		max: max,
-		sum: sum,
-		unfair: result
-	};
-	//return (max - min)/sum;
-
+	return diff/sum;
 };
