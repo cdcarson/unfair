@@ -56,11 +56,13 @@ Variance: 25
 Variance: 2500
 ```
 
-I (think I) now know that I was wrong about that. I took the fact that no state has a population less than 500,000 (or 0) to have some sort of mathematical significance. It might be a logical bound (can a state with a population less than n be a state?) but mathematically it means nothing. There is no inherent bound to a list of numbers.
+I think I was wrong to have doubts
 
-I wish I could say that all this came to me in a flash, but it didn't.
+First, I took the fact that no state has a population less than `n` to have some sort of mathematical significance. It might be a logical bound (can a state with a population less than `n` be a state?) but mathematically it means nothing. There is no inherent bound to a list of numbers.
 
-```
+Second, I still don't really understand what I am doing when I "normalize" the variation. But my function does seem to correct for the magnitude of the input:
+
+```sh
 node ./ normalizedVariance  10 20 && node ./ normalizedVariance 100 200
 Normalized Variance: 0.1111111111111111
 Normalized Variance: 0.1111111111111111
