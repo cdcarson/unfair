@@ -27,7 +27,7 @@ node ./ unfair 1 2
 Unfair: 0.3333333333333333
 ```
 
-## Discussion
+## A Discussion of Variance
 
 I've spent a bit of time thinking about the variance of a list. Let's say our test list is the populations of the 50 states:
 
@@ -56,9 +56,9 @@ Variance: 25
 Variance: 2500
 ```
 
-I think I was wrong to have doubts
+I think I was wrong. I understand my mistake as follows:
 
-First, I took the fact that no state has a population less than `n` to have some sort of mathematical significance. It might be a logical bound (can a state with a population less than `n` be a state?) but mathematically it means nothing. There is no inherent bound to a list of numbers.
+First, I took the fact that no state has a population less than `n` to have some sort of mathematical significance. It might be a logical bound (can a state with a population less than `n` be a state?) but mathematically it means nothing. There is no inherent bound to a list of numbers. In purely mathematical terms, unsullied by other logic, a state can have a negative population.
 
 Second, I still don't really understand what I am doing when I "normalize" the variation. But my function does seem to correct for the magnitude of the input:
 
@@ -67,3 +67,5 @@ node ./ normalizedVariance  10 20 && node ./ normalizedVariance 100 200
 Normalized Variance: 0.1111111111111111
 Normalized Variance: 0.1111111111111111
 ```
+
+So I have come, in my own roundabout way, to a primitive understanding of variance, and grudging acceptance of its usefulness.
